@@ -11,6 +11,11 @@ import "./MenuLateral.css";
 const menuItems: MenuItem[] = [
   {
     nome: "Dashboard",
+    rota: "/",
+    icone: "dashboard",
+  },
+  {
+    nome: "Usuario",
     rota: "/usuarios",
     icone: "dashboard",
   },

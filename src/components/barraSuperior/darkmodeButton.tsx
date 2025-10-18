@@ -39,7 +39,7 @@ function DarkmodeButton() {
       onClick={handleThemeChange}
       className="w-10 h-10 bg-[var(--base-variant)] cursor-pointer
         flex items-center justify-center rounded-full text-[var(--text-color)]
-        transition-colors duration-300 hover:scale-105"
+         hover:scale-105"
       aria-label={currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       {currentTheme === 'dark' ? (

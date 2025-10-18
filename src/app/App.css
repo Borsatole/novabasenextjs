@@ -98,8 +98,7 @@ html {
 body {
   background-color: var(--background);
   color: var(--text-color);
-  transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  
 }
 
 /* Botão do tema */
@@ -117,17 +116,4 @@ body {
 
 #theme-switch svg {
   fill: var(--text-color);
-}
-
-/* Animações */
-@keyframes panBackground {
-  0% {
-    background-position: center bottom;
-  }
-  50% {
-    background-position: center center;
-  }
-  100% {
-    background-position: center top;
-  }
 }
