@@ -1,0 +1,133 @@
+@import "tailwindcss";
+/* @plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json"; */
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* Layout geral */
+#root {
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+/* ===========================
+   🎨 Tema Claro (Padrão)
+   =========================== */
+:root {
+  /* cores principais */
+  --corPrincipal: #0050DC;
+  --corPrincipalHover: #0051dc9a;
+
+  /* Fundo Logo */
+  --fundo-logo: #ffffff1a;
+
+  /* bases */
+  --base-color: #f2f1f3;
+  --base-variant: #fff;
+
+  /* menu */
+  --sidebarcolor: #040c31;
+  --sidebarsecondarycolor: #020a3d;
+  --sidebartext-color: #f9f9f9;
+
+  /* menu - hovers */
+  --sidebarhover-color: #0050DC;
+  --sidebarhover-text-color: #ffffff;
+  --sidebarhover-border: #f9f9f9;
+  --sidebarhover-icon: #ffffff;
+
+  /* textos */
+  --text-color: #2a2f47f2;
+  --text-color2: #232738;
+  --text-white: #fcfdff;
+
+  /* Fundo Modal */
+  --fundo-modal: var(--base-color);
+
+  /* cores baseadas no tema */
+  --background: var(--base-color);
+}
+
+/* ===========================
+   🌙 Tema Escuro (usado com <html class="dark">)
+   =========================== */
+html.dark {
+  --corPrincipal: #0050DC;
+  --corPrincipalHover: #0051dc9a;
+
+  /* bases */
+  --base-color: #030925;
+  --base-variant: #050c2d;
+
+  /* menu */
+  --sidebarcolor: #040c31;
+  --sidebarsecondarycolor: #020a3d;
+  --sidebartext-color: #f9f9f9;
+
+  /* textos */
+  --text-color: #e8e9ed;
+  --secondary-text: #e8e9ed;
+  --corTexto1: #fcfdff;
+
+  /* Fundo Modal */
+  --fundo-modal: var(--base-color);
+
+  /* cores baseadas no tema */
+  --background: var(--base-color);
+}
+
+/* ===========================
+   ⚙️ Estilos Gerais
+   =========================== */
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE e Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+html {
+  font-family: Poppins, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Botão do tema */
+#theme-switch {
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--base-variant);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#theme-switch svg {
+  fill: var(--text-color);
+}
+
+/* Animações */
+@keyframes panBackground {
+  0% {
+    background-position: center bottom;
+  }
+  50% {
+    background-position: center center;
+  }
+  100% {
+    background-position: center top;
+  }
+}
