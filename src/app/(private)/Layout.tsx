@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import BarraSuperior from "@/components/barraSuperior/barraSuperior"
 import Container from "@/components/comum/container"
+import MenuLateral from '@/components/MenuLateral/MenuLateral'
 // import MenuLateral from "@/components/MenuLateral/MenuLateral"
 
 /**
@@ -25,7 +26,7 @@ export default function LayoutPrivado({ children }: LayoutPrivadoProps) {
       <Container tipo="principal">
         
         {/* Menu lateral */}
-        {/* <MenuLateral /> */}
+        <MenuLateral />
         
         {/* Área de conteúdo dinâmico (onde as páginas são renderizadas) */}
         <main 
