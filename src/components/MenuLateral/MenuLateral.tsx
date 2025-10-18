@@ -2,72 +2,43 @@
 
 import { useMenu } from "@/context/MenuContext";
 import { Confirm } from "@/components/comum/alertas";
-
 import { OpcaoMenu, OpcaoMenuComSubmenu } from "@/components/MenuLateral/OpcaoMenu";
 import { BtnFecharMenuLateral } from "@/components/MenuLateral/botoesMenu";
-
+import { MenuItem } from "@/components/tipos";
+import Image from "next/image";
 import "./MenuLateral.css";
 
-import Image from "next/image";
-
-// Estrutura de menu de exemplo
-const menuItems = [
+const menuItems: MenuItem[] = [
   {
     nome: "Dashboard",
-    rota: "/dashboard",
+    rota: "/usuarios",
     icone: "dashboard",
   },
   {
-    nome: "Usuários",
-    icone: "permissoes",
-    submenu: [
-      {
-        nome: "Lista de Usuários",
-        rota: "/usuarios",
-        icone: "dashboard",
-      },
-      {
-        nome: "Adicionar Usuário",
-        rota: "/usuarios/adicionar",
-        icone: "adicionar",
-      },
-    ],
-  },
-  {
-    nome: "Produtos",
-    icone: "dashboard",
-    submenu: [
-      {
-        nome: "Lista de Produtos",
-        rota: "/produtos",
-        icone: "dashboard",
-      },
-      {
-        nome: "Adicionar Produto",
-        rota: "/produtos/adicionar",
-        icone: "adicionar",
-      },
-      {
-        nome: "Categorias",
-        rota: "/produtos/categorias",
-        icone: "dashboard",
-      },
-    ],
-  },
-  {
-    nome: "Relatórios",
-    rota: "/relatorios",
+    nome: "Servidores",
+    rota: "/servidores",
     icone: "dashboard",
   },
-  {
-    nome: "Configurações",
-    rota: "/configuracoes",
-    icone: "dashboard",
-  },
+  // {
+  //   nome: "Usuários",
+  //   icone: "permissoes",
+  //   submenu: [
+  //     { nome: "Lista de Usuários", rota: "/usuarios" },
+  //     { nome: "Adicionar Usuário", rota: "/usuarios" },
+  //   ],
+  // },
+  // {
+  //   nome: "Servidores",
+  //   icone: "dashboard",
+  //   submenu: [
+  //     { nome: "Lista de Servidores", rota: "/servidores", icone: "dashboard" },
+  //     { nome: "Adicionar Servidores", rota: "/servidores", icone: "adicionar" },
+  //   ],
+  // },
 ];
 
 const MenuLateral = () => {
-  const { menuAberto, fecharMenu } = useMenu();
+  const { menuAberto } = useMenu();
 
   return (
     <aside
@@ -75,7 +46,7 @@ const MenuLateral = () => {
         menuAberto ? "menu-aberto" : ""
       }`}
     >
-      <BtnFecharMenuLateral funcao={fecharMenu} />
+      <BtnFecharMenuLateral />
 
       {/* Logo */}
       <div className="flex items-center justify-center mb-6 cursor-pointer">
@@ -96,15 +67,27 @@ const MenuLateral = () => {
           {menuItems.map((menu, index) => {
             if (menu.submenu) {
               return (
-                <OpcaoMenuComSubmenu key={index} nome={menu.nome} svg={menu.icone}>
+                <OpcaoMenuComSubmenu key={index} nome={menu.nome} icone={menu.icone}>
                   {menu.submenu.map((sub, i) => (
-                    <OpcaoMenu key={i} nome={sub.nome} rota={sub.rota} svg={sub.icone} />
+                    <OpcaoMenu
+                      key={i}
+                      nome={sub.nome}
+                      rota={sub.rota}
+                      icone={sub.icone}
+                    />
                   ))}
                 </OpcaoMenuComSubmenu>
               );
             }
 
-            return <OpcaoMenu key={index} nome={menu.nome} rota={menu.rota} svg={menu.icone} />;
+            return (
+              <OpcaoMenu
+                key={index}
+                nome={menu.nome}
+                rota={menu.rota}
+                icone={menu.icone}
+              />
+            );
           })}
         </nav>
 
@@ -113,7 +96,7 @@ const MenuLateral = () => {
           <hr className="border-white/10" />
           <OpcaoMenu
             nome="Sair"
-            svg="logout"
+            icone="logout"
             onClick={() =>
               Confirm({
                 onConfirm: () => alert("Logout realizado com sucesso!"),

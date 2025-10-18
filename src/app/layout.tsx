@@ -4,6 +4,9 @@ import "./globals.css";
 import "./App.css";
 import { Providers } from "@/components/Providers";
 
+
+import NextTopLoader from "nextjs-toploader";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,6 +30,17 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+
+        {/* Barra de carregamento automática */}
+        <NextTopLoader
+          color="var(--corPrincipal)"   
+          showSpinner={false}
+          height={3}                  // altura da barra
+          crawlSpeed={300}            // velocidade de “rastro”
+          shadow="0 0 10px var(--corPrincipal), 0 0 5px var(--corPrincipal)" // brilho sutil
+        />
+
+        {/* Provedor global do app */}
         <Providers>{children}</Providers>
       </body>
     </html>

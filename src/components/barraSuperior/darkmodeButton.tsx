@@ -16,7 +16,7 @@ function DarkmodeButton() {
   // remove a classe depois da animação
   setTimeout(() => {
     document.body.classList.remove('theme-switching');
-  }, 600); // mesma duração do keyframe
+  }, 100);
 };
 
   useEffect(() => {

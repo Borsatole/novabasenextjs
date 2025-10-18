@@ -1,38 +1,40 @@
+import { ReactNode } from "react";
+
 export interface SubMenuItem {
-    id: number;
-    icone?: string;
-    nome: string;
-    rota: string;
+  id?: number;
+  nome: string;
+  rota?: string;
+  icone?: string;
+  children?: ReactNode; // necessário para aceitar submenus
 }
 
 export interface MenuItem {
-  id: number;
+  id?: number;
   nome: string;
-  rota: string;
-  icone: string;
+  rota?: string;
+  icone?: string;
   submenu?: SubMenuItem[];
+  onClick?: () => void; // permite ações diretas (ex: logout)
 }
 
+// Outros tipos que você já tinha
 export interface UserData {
   id: number;
   nome: string;
   email: string;
   nivel: string;
   nivel_nome: string;
-  ativo: Boolean;
+  ativo: boolean;
   expirationTime?: EpochTimeStamp | null;
 }
-
-
 
 export interface Permissao {
   id: number;
   slug?: string;
   descricao: string;
-  allow: Boolean;
+  allow: boolean;
   created_at?: string;
   updated_at?: string;
-  
 }
 
 export interface Permissoes {
