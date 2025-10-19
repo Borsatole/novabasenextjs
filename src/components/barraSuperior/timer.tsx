@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function Timer() {
   const [tempoRestante, setTempoRestante] = useState<string>("");
+  const router = useRouter();
 
   useEffect(() => {
     const calcularTempo = () => {
@@ -36,15 +38,15 @@ function Timer() {
 
       if (novoTempo === "Sessão expirada") {
         clearInterval(interval);
-        window.location.href = "/";
+        router.push("/sign-in");
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [router]);
 
   return (
-    <div className="p-2 h-10 text-sm bg-[var(--base-variant)] cursor-pointer
+    <div className="p-2 h-10 text-sm bg-[var(--base-color)] cursor-pointer
       flex items-center justify-center rounded-full text-[var(--text-color)]">
       {tempoRestante ? `Sessão : ${tempoRestante}` : "Sessão : 00:00"}
     </div>

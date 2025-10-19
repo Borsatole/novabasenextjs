@@ -1,11 +1,12 @@
 'use client'
-// import { AuthContext } from "@src/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
+import { useContext } from "react";
 import { Avatar, Dropdown, DropdownDivider, DropdownHeader, DropdownItem } from "flowbite-react";
 
 import { Confirm } from "@/components/comum/alertas"; 
 
 function AvatarOptions() {
-//  const { logout, auth } = useContext(AuthContext);
+ const { logout } = useContext(AuthContext);
   return (
     <div className='max-w-10 h-10'>
     <Dropdown
@@ -34,7 +35,7 @@ function AvatarOptions() {
       <DropdownDivider />
       <DropdownItem onClick={() => 
         Confirm({
-            onConfirm: () => console.log("logout"), 
+            onConfirm: () => logout(), 
             onCancel: () => {},
             text: "Deseja realmente sair?"
         })}>Sign out</DropdownItem>

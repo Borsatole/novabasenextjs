@@ -6,26 +6,31 @@ import { Button } from "@/components/comum/button";
 import Alerta from "@/components/comum/alertas";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+
+import { UserData, MenuItem } from "@/components/tipos";
+
+interface LoginResponse {
+  token: string;
+  usuario: UserData;
+  menu: MenuItem[];
+  expirationTime: number;
+  serverTime: number;
+  message?: string;
+}
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
-  
-
-  function setCookie(name: string, value: string, days = 7) {
-  const expires = new Date();
-  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-}
+  const router = useRouter();
+  const { login } = useAuth();
 
   async function verificaLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
     const dadosFormularioLogin = Object.fromEntries(formData.entries());
-    const rotaApi = 'http://localhost:8080';
-
-    console.log("🔗 Dados Login:", dadosFormularioLogin);
-    console.log("🔗 Rota:", rotaApi);
+    const rotaApi = process.env.NEXT_PUBLIC_API_URL;
 
     try {
       setLoading(true);
@@ -36,25 +41,29 @@ export default function Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(dadosFormularioLogin),
+        credentials: "include",
       });
 
-    // sempre tenta ler o JSON, mesmo se status for 404
-    const data = await response.json();
+      const data: LoginResponse = await response.json();
 
-    console.log("🔗 Resposta:", data);
+      if (!response.ok) {
+        throw new Error(data.message || "Erro ao fazer login");
+      }
 
-    if (!response.ok) {
-      // aqui você pode lançar ou mostrar a mensagem do backend
-      throw new Error(data.message || response.statusText);
-    }
+      if (!data.token) {
+        throw new Error("Token não recebido do servidor.");
+      }
 
-    setCookie("token", data.token, 7);
+      // Usa o contexto para fazer login
+      login(data);
+
+      // Sucesso
+      Alerta("swal", "success", "Login realizado com sucesso!");
 
 
-    // redirecionar para a rota privada
-    window.location.href = "/";
-
-
+        router.push("/");
+        router.refresh();
+  
 
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : "Ops! Algo deu errado.";
@@ -71,32 +80,50 @@ export default function Page() {
         style={{ backgroundColor: "var(--base-color)" }}
       />
       <div className="absolute inset-0" />
+      
       <div className="relative z-10 w-full max-w-md p-12 rounded-2xl shadow-2xl bg-[var(--base-variant)] backdrop-blur-md">
         <h2 className="text-3xl font-bold text-center text-[var(--text-color)] mb-8">
           Acesse sua conta
         </h2>
 
-        <div className="flex items-center justify-center mb-6 cursor-pointer">
-          <div className="w-full flex justify-center max-w-[100%] p-3 bg-[var(--base-color)] rounded-lg backdrop-blur-sm">
+        <div className="flex items-center justify-center mb-6">
+          <div className="w-full flex justify-center p-3 bg-[var(--base-color)] rounded-lg backdrop-blur-sm">
             <Image
               src="/logo.png"
               alt="Logo"
               width={200}
               height={200}
-              className="w-[60%] h-auto object-contain max-w-[40%]"
+              className="w-[60%] h-auto object-contain"
+              priority
             />
           </div>
         </div>
 
-        <form onSubmit={verificaLogin} className="space-y-6" id="formLogin">
+        <form onSubmit={verificaLogin} className="space-y-6">
           <FormGroup label="E-mail" id="email">
-            <Input id="email" name="email" type="email" required />
+            <Input 
+              id="email" 
+              name="email" 
+              type="email"
+              autoComplete="email"
+              placeholder="seu@email.com"
+              required 
+            />
           </FormGroup>
+          
           <FormGroup label="Senha" id="password">
-            <Input id="password" name="password" type="password" required />
+            <Input 
+              id="password" 
+              name="password" 
+              type="password"
+              autoComplete="current-password"
+              placeholder="••••••••"
+              required 
+            />
           </FormGroup>
+          
           <Button type="submit" loading={loading} className="w-full">
-            Entrar
+            {loading ? "Entrando..." : "Entrar"}
           </Button>
         </form>
       </div>

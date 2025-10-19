@@ -11,7 +11,7 @@ import Tooltip from '../tooltip/tooltipwrapper';
 function BarraSuperior() {
 
   return (
-    <nav className="w-full p-4 flex bg-[var(--base-color)]  justify-between items-center b-1 border-b-1 border-[var(--base-variant)] ">
+    <nav className="w-full p-4 flex bg-[var(--base-variant)]  justify-between items-center b-1 border-b-1 border-[var(--base-variant)] ">
       
           <div>
           <BtnAbrirMenuLateral />

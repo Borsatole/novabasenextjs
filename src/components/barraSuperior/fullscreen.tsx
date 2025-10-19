@@ -35,7 +35,7 @@ function FullScreenButton() {
 
   return (
     <div
-      className="w-10 h-10 bg-[var(--base-variant)] cursor-pointer
+      className="w-10 h-10 bg-[var(--base-color)] cursor-pointer
         flex items-center justify-center rounded-full text-[var(--text-color)] hover:scale-105"
       onClick={toggleFullscreen}
     >

@@ -26,7 +26,7 @@ function DarkmodeButton() {
   // Loading animado enquanto monta
   if (!mounted) {
     return (
-      <div className="w-10 h-10 rounded-full bg-[var(--base-variant)] flex items-center justify-center">
+      <div className="w-10 h-10 rounded-full bg-[var(--base-color)] flex items-center justify-center">
         <FaSun className="text-gray-400 animate-bounce" size={20} />
       </div>
     );
@@ -37,7 +37,7 @@ function DarkmodeButton() {
   return (
     <button
       onClick={handleThemeChange}
-      className="w-10 h-10 bg-[var(--base-variant)] cursor-pointer
+      className="w-10 h-10 bg-[var(--base-color)] cursor-pointer
         flex items-center justify-center rounded-full text-[var(--text-color)]
          hover:scale-105"
       aria-label={currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
